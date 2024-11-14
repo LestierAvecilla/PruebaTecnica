@@ -1,0 +1,62 @@
+
+<section class="table">
+  <div class="header">
+    <div class="title">
+      <img src="assets/images/cart-shopping-fast.svg" alt="Carrito">
+      <p>Orden Sumary</p>
+    </div>
+    <span class="clear-cart" (click)="clearCart()">Remove all</span>
+  </div>
+
+  
+ 
+<div *ngIf="items.length === 0">
+  <p>El carrito está vacío.</p>
+</div>
+<div *ngFor="let item of items">
+  <div class="product-container">
+    <div class="product">
+      <img src="assets/images/Item.svg" alt="items" class="item-image">
+      <div class="product-details">
+        <span>{{ item.product.name }}</span>
+        <p>{{ item.product.description }}</p>
+      </div>
+    </div>
+    <div class="quantity-controls">
+      <button class="icon-button" (click)="decrementQuantity(item.product)">
+        <img src="assets/images/Minus.svg" alt="Minus" class="minus-image">
+      </button>
+      <span class="quantity">{{ item.quantity }}</span>
+      <button class="icon-button" (click)="increaseQuantity(item.product)">
+        <img src="assets/images/Plus.svg" alt="Plus" class="plus-image">
+      </button>
+      <span>{{ item.product.subtotal | currency }}</span>
+      <button class="icon-button" (click)="removeItem(item.product)">
+        <img src="assets/images/trash-can.svg" alt="trash" class="trash-image">
+      </button>
+    </div>
+  </div>
+  
+</div>
+<hr class="separator">
+<div class="totales">
+  <div *ngIf="items.length > 0">
+    <div class="total-item">
+      <span>Subtotal</span>
+      <span>{{ getTotal() | currency }}</span>
+    </div>
+    <div class="total-item">
+      <span>Shipping fees</span>
+      <span>{{ getShipping() | currency }}</span>
+    </div>
+    <div class="total-item">
+      <span>Taxes</span>
+      <span>{{ getTax() | currency }}</span>
+    </div>
+    <div class="total-item">
+      <span class="total-bold">Total (including tax)</span>
+      <span>{{ getGrandTotal() | currency }}</span>
+    </div>
+  </div>
+</div>
+</section>
